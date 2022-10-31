@@ -8,7 +8,11 @@ import br.com.alura.forum.modelo.Topico;
 
 public class TopicoDto {
 	
-	//Aqui nessa classe eu defino somente os campos que eu quero que a minha API devolva
+	/**
+	 * Aqui nessa classe, eu defino somente os campos que eu quero que a minha API devolva.
+	 * NÃO é uma boa prática devolver as classes de domínio (models) no Controller
+	 * Por isso é bom implementar os DTO's para definir o que queremos devolver.
+	**/
 	private Long id;
 	private String titulo;
 	private String mensagem;
