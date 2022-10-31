@@ -1,6 +1,10 @@
 package br.com.alura.forum.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import br.com.alura.forum.modelo.Topico;
 
@@ -8,4 +12,11 @@ import br.com.alura.forum.modelo.Topico;
 //O JpaRepository já tem os métodos CRUD implementados
 public interface TopicoRepository extends JpaRepository<Topico, Long>{
 
+	//Curso - Entidade de relacionamento + Nome - Atributo dentro da entidade relacionamento
+	List<Topico> findByCursoNome(String nomeCurso);
+	
+	//Faz a mesma coisa do método de cima que o Spring gera automático por conta
+	//da nomenclatura "find.."
+	@Query("SELECT t FROM Topico t WHERE t.curso.nome = :nomeCurso")
+	List<Topico> carregarPeloNomeDoCurso(@Param("nomeCurso") String nomeCurso);
 }
