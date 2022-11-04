@@ -1,6 +1,6 @@
 # API Fórum da Alura - Curso Spring Boot API REST: construa uma API
 
-API Desenvolvida durante o curso de Spring Boot API Rest na Alura
+API Desenvolvida durante o curso de Spring Boot API Rest na Alura 👾
 
 Anotações importantes
 
