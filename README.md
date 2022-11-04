@@ -2,7 +2,7 @@
 
 API Desenvolvida durante o curso de Spring Boot API Rest na Alura 👾
 
-Anotações importantes
+ ✍🏻 Anotações importantes
 
 - As classes de domínio (models) são as tabelas no banco de dados
 
