@@ -1,7 +1,7 @@
 package br.com.alura.forum.controller;
 
-import br.com.alura.forum.controller.dto.TopicoDto;
-import br.com.alura.forum.controller.form.TopicoForm;
+import br.com.alura.forum.dto.TopicoDto;
+import br.com.alura.forum.form.TopicoForm;
 import br.com.alura.forum.modelo.Topico;
 import br.com.alura.forum.repository.CursoRepository;
 import br.com.alura.forum.repository.TopicoRepository;
@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -42,7 +43,7 @@ public class TopicosController{
     
     //Recebe os dados que estão vindo na requisição
     @PostMapping
-    public ResponseEntity<TopicoDto> cadastrar(@RequestBody TopicoForm form,
+    public ResponseEntity<TopicoDto> cadastrar(@RequestBody @Valid TopicoForm form,
 											   UriComponentsBuilder uriBuilder) {
     	Topico topico = form.converter(cursoRepository);
     	topicoRepository.save(topico);
