@@ -1,5 +1,6 @@
 package br.com.alura.forum.controller;
 
+import br.com.alura.forum.dto.DetalhesDoTopicoDto;
 import br.com.alura.forum.dto.TopicoDto;
 import br.com.alura.forum.form.TopicoForm;
 import br.com.alura.forum.modelo.Topico;
@@ -8,11 +9,7 @@ import br.com.alura.forum.repository.TopicoRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
@@ -54,4 +51,13 @@ public class TopicosController{
 		//Quando eu crio um recurso, preciso retornar a uri e o corpo do que foi criado
 		return ResponseEntity.created(uri).body(new TopicoDto(topico));
     }
+
+	//Devolver os detalhes de um tópico específico
+	//O nome da variável no parâmetro deve ser igual ao mapeado no GetMapping
+	@GetMapping("/{id}")
+	public DetalhesDoTopicoDto detalharTopico(@PathVariable Long id) {
+		Topico topico = topicoRepository.getReferenceById(id);
+		return new DetalhesDoTopicoDto(topico);
+	}
+
 }
