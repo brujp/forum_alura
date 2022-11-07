@@ -42,6 +42,7 @@ public class TopicosController{
     
     //Recebe os dados que estão vindo na requisição
     @PostMapping
+	@Transactional //Update no banco de dados
     public ResponseEntity<TopicoDto> cadastrar(@RequestBody @Valid TopicoForm form,
 											   UriComponentsBuilder uriBuilder) {
     	Topico topico = form.converter(cursoRepository);
@@ -69,6 +70,13 @@ public class TopicosController{
 		Topico topicoAtualizado = form.atualizarTopico(id, topicoRepository);
 
 		return ResponseEntity.ok(new TopicoDto(topicoAtualizado));
+	}
+
+	@DeleteMapping("/{id}")
+	@Transactional //Update no banco de dados
+	public ResponseEntity<?> removerTopico(@PathVariable Long id) {
+		topicoRepository.deleteById(id);
+		return ResponseEntity.ok().build();
 	}
 
 }
