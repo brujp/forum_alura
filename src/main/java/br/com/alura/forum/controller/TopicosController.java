@@ -17,6 +17,7 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/topicos")
@@ -58,25 +59,38 @@ public class TopicosController{
 	//Devolver os detalhes de um tópico específico
 	//O nome da variável no parâmetro deve ser igual ao mapeado no GetMapping
 	@GetMapping("/{id}")
-	public DetalhesDoTopicoDto detalharTopico(@PathVariable Long id) {
-		Topico topico = topicoRepository.getReferenceById(id);
-		return new DetalhesDoTopicoDto(topico);
+	public ResponseEntity<DetalhesDoTopicoDto> detalharTopico(@PathVariable Long id) {
+		Optional<Topico> topico = topicoRepository.findById(id);
+		if(topico.isPresent()) {
+			return ResponseEntity.ok(new DetalhesDoTopicoDto(topico.get()));
+		}
+
+		return ResponseEntity.notFound().build(); //Build é pra montar o objeto ResponseEntity
 	}
 
 	@PutMapping("/{id}")
 	@Transactional //Update no banco de dados
 	public ResponseEntity<TopicoDto> atualizarTopico(@PathVariable Long id,
 													 @RequestBody @Valid AtualizacaoTopicoForm form) {
-		Topico topicoAtualizado = form.atualizarTopico(id, topicoRepository);
+		Optional<Topico> topico = topicoRepository.findById(id);
+		if(topico.isPresent()) {
+			Topico topicoAtualizado = form.atualizarTopico(id, topicoRepository);
+			return ResponseEntity.ok(new TopicoDto(topicoAtualizado));
+		}
 
-		return ResponseEntity.ok(new TopicoDto(topicoAtualizado));
+		return ResponseEntity.notFound().build();
 	}
 
 	@DeleteMapping("/{id}")
 	@Transactional //Update no banco de dados
 	public ResponseEntity<?> removerTopico(@PathVariable Long id) {
-		topicoRepository.deleteById(id);
-		return ResponseEntity.ok().build();
+		Optional<Topico> topico = topicoRepository.findById(id);
+		if(topico.isPresent()) {
+			topicoRepository.deleteById(id);
+			return ResponseEntity.ok().build();
+		}
+
+		return ResponseEntity.notFound().build();
 	}
 
 }
