@@ -2,6 +2,8 @@ package br.com.alura.forum.repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -13,7 +15,7 @@ import br.com.alura.forum.modelo.Topico;
 public interface TopicoRepository extends JpaRepository<Topico, Long>{
 
 	//Curso - Entidade de relacionamento + Nome - Atributo dentro da entidade relacionamento
-	List<Topico> findByCursoNome(String nomeCurso);
+	Page<Topico> findByCursoNome(String nomeCurso, Pageable paginacao);
 	
 	//Faz a mesma coisa do método de cima que o Spring gera automático por conta
 	//da nomenclatura "find.."

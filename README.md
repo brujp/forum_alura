@@ -64,3 +64,5 @@ Métodos PUT, DELETE e tratamento de erro:
 - O método getOne lança uma exception quando o id passado como parâmetro não existir no banco de dados;
 
 - O método findById retorna um objeto Optional<>, que pode ou não conter um objeto.
+
+

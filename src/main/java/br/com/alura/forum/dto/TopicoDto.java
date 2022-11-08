@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import br.com.alura.forum.modelo.Topico;
+import org.springframework.data.domain.Page;
 
 public class TopicoDto {
 	
@@ -40,12 +41,8 @@ public class TopicoDto {
 	}
 
 	//Transformar Topico (model) para TopicoDto
-	public static List<TopicoDto> converter(List<Topico> topicos) {
-		/**
-		 * Pega a lista de Topicos, faz um "for", pra cada Topico, dar um "new" no TopicoDto,
-		 * guardar numa lista de TopicoDto e devolver essa lista de TopicoDto
-		 **/
-		return topicos.stream().map(TopicoDto::new).collect(Collectors.toList());
+	public static Page<TopicoDto> converter(Page<Topico> topicos) {
+		return topicos.map(TopicoDto::new);
 	}
 	
 }
