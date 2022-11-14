@@ -77,6 +77,16 @@ Segurança da API, Cache e Monitoramento:
 
 - Para receber os parâmetros de ordenação e paginação diretamente nos métodos do controller, devemos habilitar o módulo SpringDataWebSupport, adicionando a anotação @EnableSpringDataWebSupport na classe ForumApplication.
 
+Melhorando desempenho com Spring Cache:
 
+- Para utilizar o módulo de cache do Spring Boot, devemos adicioná-lo como dependência do projeto no arquivo pom.xml;
+
+- Para habilitar o uso de caches na aplicação, devemos adicionar a anotação @EnableCaching na classe ForumApplication;
+
+- Para que o Spring guarde o retorno de um método no cache, devemos anotá-lo com @Cacheable;
+
+- Para o Spring invalidar algum cache após um determinado método ser chamado, devemos anotá-lo com @CacheEvict;
+
+- Devemos utilizar cache apenas para as informações que nunca ou raramente são atualizadas no banco de dados.
 
 
